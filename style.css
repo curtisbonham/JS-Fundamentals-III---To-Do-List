@@ -1,0 +1,98 @@
+*{
+  box-sizing: border-box;
+}
+
+/* formatting header */
+.container{
+  background-color: maroon;
+  text-align:center;
+  margin-bottom: 25px;
+  height: 100px;
+}
+
+/* formatting add button */
+.addBtn {
+  background-color: lightgray;
+  margin-left: auto;
+  width: 125px;
+  height: 30px;
+}
+
+/* formatting input line for new list item */
+#myInput{
+  width: 50%;
+  height: 30px;
+}
+/* formatting the list */
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* set every other list item to a different color */
+ul li:nth-child(even){
+background: #f9f9f9;
+}
+
+/* styling the list items */
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  background: gray;
+  font-size: 18px;
+  transition: 0.2s;
+
+  /* making the list items unselectable */
+  -webkit-user-select: none;
+  -mox-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* change color when hover over list item */
+ul li:hover{
+  background: orange;
+}
+
+/* change the list item to crossed out when selected */
+ul li.checked {
+  background: lightgreen;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+/* add a check mark when list item is clicked on */
+ul li.checked::before{
+  content:'';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+/* styling the close button for each list item once checked */
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+/* changing color when hovering over close buttons */
+.close:hover{
+  background-color: #f44336;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+}
+
+/* formattingn the header element */
+h1 {
+  color: white;
+}

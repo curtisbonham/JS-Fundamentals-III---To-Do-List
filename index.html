@@ -4,10 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
-  <title>Document</title>
+  <title>My To Do List</title>
 </head>
 <body>
-  <h1>My page</h1>
+  <header class="container">
+    <h1>What to do?</h1>
+    <input type="text" id="myInput" placeholder="What to do next?">
+    <button class="addBtn" id="addBtn">Add New</button>
+  </header>
+  <div id="list">
+    <ul id="myUL">
+      <li class="">Users should be able to view all of the to-do tasks</li>
+      <li class="">Users should be able to add a to-do to the list of to-do tasks</li>
+      <li class="">Users should be able to mark a task as completed by crossing it out on click</li>
+      <li class="">Users should be able to remove to-do tasks by removing those elements from the DOM</li>
+      <li class="checked">The page should be aesthetically pleasing (aka be styled)</li>
+    </ul>
+  </div>
 
   <script src="./index.js"></script>
 </body>
