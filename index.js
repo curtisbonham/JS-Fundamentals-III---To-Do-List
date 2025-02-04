@@ -15,6 +15,7 @@
 //   }
 // }, false);
 
+// finds value of input field and creates new list item
 const newListItem = () =>{
 let li = document.createElement("li");
 let inputValue = document.getElementById("myInput").value;
@@ -28,6 +29,7 @@ if(inputValue === ""){
 document.getElementById("myInput").value = "";
 }
 
-let addNew = addBtn.addEventListener("click", () =>{
-  
-})
+// gives functionality to the add new button
+const addBtn = document.getElementById("addBtn");
+addBtn.addEventListener("click", newListItem);
+
