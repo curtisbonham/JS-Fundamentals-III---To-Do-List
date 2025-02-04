@@ -8,7 +8,7 @@
   background-color: maroon;
   text-align:center;
   margin-bottom: 25px;
-  height: 100px;
+  height: 150px;
 }
 
 /* formatting add button */
@@ -100,4 +100,8 @@ ul li.checked::before{
 /* formattingn the header element */
 h1 {
   color: white;
+}
+#date{
+  color: white;
+  font-size: 16px;
 }
