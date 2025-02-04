@@ -6,12 +6,12 @@ This project allows you to add items to a to-do list. Be that tasks that you nee
 
 1. Clone the repository within desired computer directory:
 
- HTTPS: git clone https://github.com/curtisbonham/JS-Fundamentals-III---To-Do-List.git
+    HTTPS: git clone https://github.com/curtisbonham/JS-Fundamentals-III---To-Do-List.git
 
- SSH: git clone git@github.com:curtisbonham/JS-Fundamentals-III---To-Do-List.git
+    SSH: git clone git@github.com:curtisbonham/JS-Fundamentals-III---To-Do-List.git
 
  2. Run the repository:
 
-code JS-Fundamentals-III---To-DO-List
+    code JS-Fundamentals-III---To-DO-List
 
 3. Start logging and completing tasks!
