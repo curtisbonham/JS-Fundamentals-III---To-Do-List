@@ -1,5 +1,6 @@
 *{
   box-sizing: border-box;
+
 }
 
 /* formatting header */
@@ -23,6 +24,11 @@
   width: 50%;
   height: 30px;
 }
+
+/* formatting the body */
+body{
+  background-color: aliceblue;
+}
 /* formatting the list */
 ul {
   margin: 0;
@@ -31,7 +37,7 @@ ul {
 
 /* set every other list item to a different color */
 ul li:nth-child(even){
-background: #f9f9f9;
+background: lightgray;
 }
 
 /* styling the list items */
@@ -52,7 +58,7 @@ ul li {
 
 /* change color when hover over list item */
 ul li:hover{
-  background: orange;
+  background: lightskyblue;
 }
 
 /* change the list item to crossed out when selected */
