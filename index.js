@@ -3,7 +3,6 @@ const taskList = document.getElementById("myUL");
 const addBtn = document.getElementById("addBtn");
 
 // Retrieve tasks from localStorage or initialize an empty array
-// Each task is now an object with { text, completed }
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 // Render tasks on the page
