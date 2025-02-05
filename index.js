@@ -1,120 +1,89 @@
 const taskInput = document.getElementById("myInput");
 const taskList = document.getElementById("myUL");
 const addBtn = document.getElementById("addBtn");
-const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-// finds value of input field and creates new list item
-const newListItem = () =>{
-let li = document.createElement("LI");
-let inputValue = taskInput.value;
-let text = document.createTextNode(inputValue);
-li.appendChild(text);
-if(inputValue === ""){
-  alert("Your entry is blank! Pleae find something to do!");
-  return;
-} else {
-  taskList.appendChild(li);
-  tasks.push(inputValue);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  displayTasks();
+// Retrieve tasks from localStorage or initialize an empty array
+// Each task is now an object with { text, completed }
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-  //creates a close button when a new item is added with add button
-  let toDoList = document.getElementsByTagName("LI");
+// Render tasks on the page
+const renderTasks = () => {
+  taskList.innerHTML = ""; // Clear existing list
+  tasks.forEach((task, index) => {
+    // Create list item for each task
+    let li = document.createElement("LI");
+    li.textContent = task.text;
 
-  for(let i = 0; i < toDoList.length; i++){
-  let span = document.createElement("span");
-  let closeIcon = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(closeIcon);
-  toDoList[i].appendChild(span);
+    // If the task is marked as completed, add the "checked" class
+    if (task.completed) {
+      li.classList.add("checked");
+    }
+
+    // Create close button for the task
+    let span = document.createElement("span");
+    span.className = "close";
+    span.appendChild(document.createTextNode("\u00D7"));
+    li.appendChild(span);
+
+    // Add click event on list item to toggle its completed state
+    li.addEventListener("click", (event) => {
+      // Prevent the click on the close button from toggling the check
+      if (event.target.classList.contains("close")) {
+        return;
+      }
+      // Toggle the "checked" class and update the task object
+      li.classList.toggle("checked");
+      tasks[index].completed = li.classList.contains("checked");
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    });
+
+    // Add click event for the close button to delete the task
+    span.addEventListener("click", () => {
+      tasks.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTasks(); // Re-render list after deletion
+    });
+
+    // Append the list item to the task list
+    taskList.appendChild(li);
+  });
 };
-}
-//clears the input field after submitting new task
-taskInput.value = "";
 
-//puts focus back on input field after submitting new task
-taskInput.focus();
-}
+// Function to add a new task
+const newListItem = () => {
+  let inputValue = taskInput.value.trim();
+  if (inputValue === "") {
+    alert("Your entry is blank! Please find something to do!");
+    return;
+  }
 
-// gives functionality to the add new button
+  // Create a new task object with completed set to false
+  let newTask = {
+    text: inputValue,
+    completed: false
+  };
+
+  // Add new task to tasks array and update localStorage
+  tasks.push(newTask);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  renderTasks();
+
+  // Clear and refocus input field
+  taskInput.value = "";
+  taskInput.focus();
+};
+
+// Attach event listener to add button
 addBtn.addEventListener("click", newListItem);
 
-//allows you to cross off a to-do list item when completed or uncheck
-//if not actually completed
-const list = document.querySelector("ul");
-list.addEventListener("click", (event) => {
-  if(event.target.tagName === "LI"){
-    event.target.classList.toggle("checked");
-  }
-}, false);
-
-//removes list item when the close button (X) is clicked
-list.addEventListener("click", (event) => {
-  if(event.target.className === "close"){
-    const listItem = event.target.parentNode;
-    listItem.remove()
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    displayTasks();
-  }
-});
-
-const addTaskToDOM = (taskText, index) => {
-  let li = document.createElement("LI");
-  li.textContent = taskText;
-  let span = document.createElement("span");
-  let closeIcon = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(closeIcon);
-  li.appendChild(span);
-  taskList.appendChild(li);
-  span.addEventListener("click", () => {
-    tasks.splice(index, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    displayTasks();
-  });
-//   li.addEventListener("click", () => {
-//     li.classList.toggle("checked");
-//   });
-//   const list = document.querySelector("ul");
-//  list.addEventListener("click", (event) => {
-//   if(event.target.tagName === "LI"){
-//     event.target.classList.toggle("checked");
-//   }
-// }, false);
+// Display the current date
+const displayDate = () => {
+  let date = new Date().toDateString();
+  document.querySelector("#date").innerHTML = date;
 };
 
-const displayTasks = () => {
-  taskList.innerHTML = "";
-  tasks.forEach((taskText, index) => {
-    addTaskToDOM(taskText, index);
-  });
-
-}
-
-const displayDate = () => {
-  let date = new Date()
-  date = date.toString().split(" ")
-  document.querySelector("#date").innerHTML = `${date[1]} ${date[2]} ${date[3]}`
-}
-
+// When the page loads, display the date and render tasks from localStorage
 window.onload = () => {
-  displayDate()
-  displayTasks()
-}
-
-
-
-// const loadTasks = () => {
-//   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-//   tasks.forEach(task => {
-//     let li = document.createElement('li');
-//     li.textContent = task;
-//     taskList.appendChild(li);
-//   });
-// }
-
-// window.addEventListener('load', loadTasks);
-
-
-
-
+  displayDate();
+  renderTasks();
+};
